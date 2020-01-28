@@ -1,19 +1,26 @@
 #!/usr/bin/env python3
 
+#Import statements mainly for BeautifulSoup, requests, re, and json
 from bs4 import BeautifulSoup
 import requests
 import re
 import json
 import datetime
 
+#Function definition for when user chooses to have most popular movies to be listed
 def scrapePopularData():
     
+    #Since the URL is static for this choice, we hardcode it here
     url = "https://www.imdb.com/chart/moviemeter/?ref_=nv_mv_mpm"
+    #Get response for getting the web page content
     response = requests.get(url, timeout=5)
+    #Finally, the BS package returns the HTML source code for the web page
     content = BeautifulSoup(response.content, "html.parser")
 
     movie_list = []
-
+    
+    #We use the tag 'tr' to identify a movie container; the main "box" holding the data we want to parse
+    #We loop through each one and save data into a movie Object thats in the form of a dictionary
     for movie_container in content.findAll('tr'):
     
         title_col_cont = str(movie_container.find('td', attrs={"class":"titleColumn"}))
