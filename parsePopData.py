@@ -149,7 +149,7 @@ def scrapeNewsData():
     with open("movieNewsData.json", "w+") as outfile:
         json.dump(article_list, outfile)
 
-scrapeNewsData()
+
 #Prints news data in user-friendly format by opening the file that contains the news Object data
 def readNewsData():
     
