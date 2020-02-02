@@ -107,16 +107,12 @@ def scrapeNewsData():
         author_cont = str(article_container.find('li', attrs={"class":"ipl-inline-list__item news-article__author"}))
         source_cont = str(article_container.find('li', attrs={"class":"ipl-inline-list__item news-article__source"}))
         article_cont = str(article_container.find('div', attrs={"class":"news-article__content"}))
-        url_cont = str(article_container.find('a', attrs={"class":"news-content__offsite-link"}))
-
-        #print(url_cont + "\n\n")
-
+      
         matches_title = re.search(r">(.*)</a>", title_col_cont)
         matches_date = re.search(r">(.*)</li>", date_cont)
         matches_author = re.search(r">(.*)</li>", author_cont)
         matches_source = re.search(r">(.*)</a>", source_cont)
-        matches_url = re.search(r"href=\"(.*?)\"", url_cont)
-
+        
         if matches_title:
             article_title = matches_title.group(1)
 
@@ -128,11 +124,7 @@ def scrapeNewsData():
         
         if matches_source:
             article_source = matches_source.group(1)
-        
-        if matches_url:
-            article_url = matches_url.group(1)
-            print(article_url+"\n\n")
-
+       
         article_text = stripArticle(article_cont)
         
         articleObject = {
